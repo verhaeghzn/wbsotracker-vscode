@@ -3,3 +3,10 @@ dist
 node_modules
 .vscode-test/
 *.vsix
+.env
+.DS_Store
+.idea/
+*.log
+*.tmp
+coverage/
+.vscode/
