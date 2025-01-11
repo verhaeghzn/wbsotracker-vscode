@@ -27,19 +27,7 @@ function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  // Command to get the token
-  let getTokenDisposable = vscode.commands.registerCommand(
-    "wbsotracker-vscode.get-token",
-    () => {
-      token = context.workspaceState.get("token", null);
-      vscode.window.showInformationMessage(
-        "Token: " + (token || "No token set")
-      );
-    }
-  );
-
   let onSaveDisposable = vscode.workspace.onDidSaveTextDocument((document) => {
-    vscode.window.showInformationMessage(`File saved: ${document.fileName}`);
     getGitRepoName(document.fileName).then((repoName) => {
       if (repoName && token) {
         handleFileSave(token, document, repoName);
@@ -48,7 +36,6 @@ function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(setTokenDisposable);
-  context.subscriptions.push(getTokenDisposable);
   context.subscriptions.push(onSaveDisposable);
 }
 
@@ -69,7 +56,7 @@ function getGitRepoName(filePath: string): Promise<string | null> {
   return new Promise((resolve) => {
     const folderPath = path.dirname(filePath);
     exec(
-      `git rev-parse --show-toplevel`,
+      `git config --get remote.origin.url | sed -E 's|.*[/:]([^/]+)/([^/]+)\.git$|\1/\2|'`,
       { cwd: folderPath },
       (error, stdout) => {
         if (error) {

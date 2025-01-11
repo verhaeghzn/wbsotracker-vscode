@@ -2,7 +2,7 @@
   "name": "wbsotracker-vscode",
   "displayName": "wbsotracker-vscode",
   "description": "A VSCode extension for tracking WBSO hours while your coding.",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "publisher": "wbsotracker",
   "engines": {
     "vscode": "^1.96.0"
@@ -10,7 +10,7 @@
   "author": {
     "name": "Bart Verhaegh"
   },
-  "icon": "images/icon.png",
+  "icon": "/images/icon.png",
   "categories": [
     "Other"
   ],
@@ -23,7 +23,6 @@
     "type": "git",
     "url": "git+https://github.com/verhaeghzn/wbsotracker-vscode.git"
   },
-  "license": "SEE LICENSE IN LICENSE file",
   "homepage": "https://www.wbsotracker.nl",
   "activationEvents": [],
   "main": "./dist/extension.js",
