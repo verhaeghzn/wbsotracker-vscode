@@ -56,7 +56,7 @@ function getGitRepoName(filePath: string): Promise<string | null> {
   return new Promise((resolve) => {
     const folderPath = path.dirname(filePath);
     exec(
-      `git config --get remote.origin.url | sed -E 's|.*[/:]([^/]+)/([^/]+)\.git$|\1/\2|'`,
+      `git config --get remote.origin.url | awk -F'[:/.]' '{print $(NF-2)"/"$(NF-1)}'`,
       { cwd: folderPath },
       (error, stdout) => {
         if (error) {
